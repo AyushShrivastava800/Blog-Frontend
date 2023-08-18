@@ -4,12 +4,12 @@ export const navLinks = [
         path:"/"
     },
     {
-        title : "Store",
-        path:"/store"
+        title : "login",
+        path:"/login"
     },
     {
-        title : "Blog",
-        path:"/blog"
+        title : "signup",
+        path:"/signup"
     },
     // {
     //     title : "Products",

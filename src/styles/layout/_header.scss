@@ -1,0 +1,30 @@
+.Navbar {
+  .appbar {
+    justify-content: center;
+    align-items: center;
+    height: 6rem;
+    background-color: transparent;
+    position: absolute;
+    box-shadow: none;
+    @media only screen and (max-width: 600px) {
+        background-color:rgb(16,34,60);
+        height: 3rem;
+    }
+    .toolbar {
+        gap: 1rem;
+      justify-content: flex-end;
+      .signupLink{
+        text-decoration: none;
+      }
+      .signupBtn {
+        font-size: 16px;
+        color: black;
+        text-decoration: none;
+        @media only screen and (max-width: 600px) {
+          color: #fff;
+        }
+      }
+    }
+   
+  }
+}
