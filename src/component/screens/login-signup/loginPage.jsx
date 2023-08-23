@@ -1,6 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import LogInForm from "./LogInForm";
+import LogInForm from "./forms/LogInForm";
 import React from "react";
 
 function loginPage() {

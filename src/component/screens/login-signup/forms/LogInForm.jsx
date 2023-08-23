@@ -3,48 +3,64 @@ import * as Yup from "yup";
 import {
   Box,
   Button,
-  Grid,
-  Paper,
   TextField,
   Typography,
-  FormLabel,
-  FormControl,
-  RadioGroup,
-  Radio,
-  FormControlLabel,
-  Select,
-  InputLabel,
-  MenuItem,
-  FormHelperText,
-  Checkbox,
-  Container
+  Alert,
+  AlertTitle,
 } from "@mui/material";
-
+import Cookies from 'js-cookie';
+import { Container } from "@mui/system";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#cc9966",
-    },
-  },
-});
-
+import { useLoginMutation } from "../../../features/api/userApi";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const initialValues = {
-  name: "",
+  email: "",
+  password: "",
 };
 const validationSchema = Yup.object({
-  name: Yup.string()
-    .max(15, "Must be 15 characters or less")
-    .required("Required"),
   email: Yup.string().required("Required"),
   password: Yup.string().required("Required"),
-  confPassword: Yup.string().required("Required"),
 });
-const HandleSubmit = (values, props) => {};
-function SignupForm() {
+function LogInForm() {
+  const navigate=useNavigate();
+  const [messge, setError] = useState("");
+  const [successmessge, setSuccess] = useState("");
+  const [Loginusers, { isSuccess }] = useLoginMutation();
+
+  const HandleSubmit = async (values, props) => {
+    try {
+      const result = await Loginusers(values);
+    
+      if (result.data) {     
+        setSuccess(result.data.message);
+        localStorage.setItem("loggedinUser", JSON.stringify(result.data));
+        Cookies.set('jwt', JSON.stringify(result.data.authToken) , { expires:0.5 });
+        props.resetForm();
+      } else {
+        setError(result.error.data.message);
+      }
+    } catch (error) {
+      setError(error);
+    }
+  };
+
+
+
+  useEffect(() => {
+    if (messge || successmessge) {
+      
+      const timeout = setTimeout(() => {
+        setError("");
+        setSuccess("");
+        navigate('/blog'); 
+      }, 2000);
+
+      return () => clearTimeout(timeout);
+    }
+    console.log("object") 
+  }, [messge, successmessge]);
+
   return (
     <>
       <Box className="signUpForm">
@@ -52,8 +68,10 @@ function SignupForm() {
           <Box className="mt-18">
             <Box>
               <Typography className="hellohead">
-                Hello 👋, Welcome!
-                <Typography className="helloSubHead">Sign up</Typography>
+                Hello 👋, Welcome Back!
+                <Typography className="helloSubHead">
+                  Stay connected with us by logging in using your Credentials.
+                </Typography>
               </Typography>
             </Box>
             <Box className="mt-18">
@@ -63,21 +81,8 @@ function SignupForm() {
                 validationSchema={validationSchema}
               >
                 {(props) => {
-                  console.log(props);
                   return (
                     <Form>
-                      <Box align="center">
-                        <Field
-                          as={TextField}
-                          name="name"
-                          label="name"
-                          type="text"
-                          fullWidth
-                          margin="dense"
-                          helperText={<ErrorMessage name="name" />}
-                          error={props.errors.name && props.touched.name}
-                        />
-                      </Box>
                       <Box align="center">
                         <Field
                           as={TextField}
@@ -105,28 +110,35 @@ function SignupForm() {
                           }
                         />
                       </Box>
-                      <Box align="center">
-                        <Field
-                          as={TextField}
-                          name="confPassword"
-                          label="Confirm Password"
-                          type="text"
-                          fullWidth
-                          margin="dense"
-                          helperText={<ErrorMessage name="confPassword" />}
-                          error={
-                            props.errors.confPassword &&
-                            props.touched.confPassword
-                          }
-                        />
+                      <Box>
+                        {messge ? (
+                          <Box className="mt-10 mb-10">
+                            <Alert severity="error">
+                              <AlertTitle>Error</AlertTitle>
+                              {messge} — <strong>check it out!</strong>
+                            </Alert>
+                          </Box>
+                        
+                        ) : successmessge ? (
+                          <Box className="mt-10 mb-10">
+                            <Alert severity="success">
+                              <AlertTitle>Success</AlertTitle>
+                              {successmessge} — <strong>check it out!</strong>
+                            </Alert>
+                     
+        
+                          </Box>
+                        ) : null}
                       </Box>
+
                       <Box>
                         <Button
                           fullWidth
                           variant="contained"
                           className="regbtn"
+                          type="submit"
                         >
-                          Register
+                          Login
                         </Button>
                       </Box>
                     </Form>
@@ -141,4 +153,4 @@ function SignupForm() {
   );
 }
 
-export default SignupForm;
+export default LogInForm;

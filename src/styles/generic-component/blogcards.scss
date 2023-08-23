@@ -1,0 +1,16 @@
+.blogCards{
+    border-radius: 10px;
+    transition: all 0.1s ease-in-out 0s;
+    &:hover{
+        transform: translateY(-4px);
+        cursor: pointer;
+    }
+    .Cardmedia{
+        height: 360px;
+        clip-path:ellipse(99% 63% at 18% 37%)
+    }
+    .CardActions{
+        padding: 16px;
+        gap: 10px;
+    }
+}

@@ -18,6 +18,7 @@
         font-size: 16px;
       }
     }
+    
     .regbtn {
       padding: 1rem;
       border-radius: 20px;
@@ -30,7 +31,14 @@
         background-color: rgb(156, 83, 0);
       }
     }
-    .field {
+    .alert-container {
+      position: relative;
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
+    }
+    
+    .alert-fadeout {
+      opacity: 0;
     }
   }
   .loginForm {

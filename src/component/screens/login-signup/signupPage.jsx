@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import SignupForm from "./SignupForm";
-import LogInForm from "./LogInForm";
+import SignupForm from "./forms/SignupForm";
+
 import React from "react";
 
 function signupPage() {
