@@ -20,7 +20,7 @@ $grid-breakpoints: (
   xlBreakpoint: $xl-breakpoint,
 );
 
-$primary: #cc9966;
+$primary:rgb(33, 55, 85);
 $secondary: #7dd2ea;
 $error: #c5291c;
 $white: #ffffff;
@@ -33,7 +33,7 @@ $light-red: #ef837b;
 $light-green: #a6c76c;
 $light-gray: #cccccc;
 $light-blue: #7dd2ea;
-$dark-gray: #333333;
+$dark-gray: rgb(16, 34, 60);
 $field-background: #f9f9f9;
 $linear-background: transparent linear-gradient(90deg, #005395 0%, #002a4b 100%)
   0% 0% no-repeat padding-box;

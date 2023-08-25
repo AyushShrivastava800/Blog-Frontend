@@ -1,0 +1,29 @@
+.HorizontalCards {
+  border-radius: 10px;
+  transition: all 0.1s ease-in-out 0s;
+ 
+  &:hover{
+      transform: translateY(-4px);
+      cursor: pointer;
+  }
+  .contentGrid{
+    display: flex;
+    flex-direction: column;
+    
+    padding: 2rem;
+  }
+  .Cardmedia{
+    height: 100%;
+    clip-path: circle(66.8% at 67% 57%);
+    width:160%;
+
+    @media only screen and (max-width:600px){
+      height: 360px;
+      clip-path:ellipse(99% 63% at 18% 37%)
+    }
+  }
+  .CardActions{
+      padding: 16px;
+      gap: 10px;
+  }
+}
