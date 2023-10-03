@@ -1,9 +1,6 @@
 .Add-blog-page {
 
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+
 
     .blogHead {
         margin-top: 6rem;
@@ -15,5 +12,10 @@
     .input-fields {
         max-width: 31.25rem;
         width: 100%;
+    }
+    .buttons-box{
+        max-width: 15rem;
+        width: 100%;
+  
     }
 }

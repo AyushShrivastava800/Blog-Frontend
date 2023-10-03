@@ -2,6 +2,8 @@ import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import BasicModal from "../../screens/signup/BasicModal";
 
 export const RoundButton = ({ title, url }) => {
   return (
@@ -23,24 +25,27 @@ export const SubmitButton = ({ title }) => {
 };
 
 export const AddBlog = ({ title }) => {
-  const navigate = useNavigate();
-
+ 
   return (
     <Button
       type="submit"
       className="AddBlog mt-18"
-      fullWidth
-      onClick={() => navigate("/createblog")}
+      fullWidth    
     >
       {title}
     </Button>
   );
 };
+
+
+
+
+
 export const UploadButton = ({ title }) => {
   return (
-    <Button variant="contained" component="label" className="uploadbtn mt-18">
+    <Button variant="outlined" component="label" className="uploadbtn mt-18 ">
       Upload File
-      <input type="file" hidden />
+      <input name="file" type="file" hidden />
     </Button>
   );
 };

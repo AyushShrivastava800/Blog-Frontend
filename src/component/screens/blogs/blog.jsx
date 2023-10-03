@@ -35,7 +35,9 @@ function Blog() {
             <Container>
               <Box className="mt-18 mb-50   ">
                 <Typography className="blog-head">{myblog.title}</Typography>
-                <Typography className="mt-18 blog-body"></Typography>
+                <Typography className="mt-18 blog-body">
+                  {myblog.description}
+                </Typography>
               </Box>
             </Container>
           </Grid>

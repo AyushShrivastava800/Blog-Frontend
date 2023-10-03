@@ -26,7 +26,7 @@ export default function Header() {
         <Toolbar>
           <Box component="img" src={logo} className="logo"></Box>
           <Box sx={{ flexGrow: 1 }}></Box>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" className="loginBtn">Login</Button>
         </Toolbar>
       </AppBar>
     </Box>

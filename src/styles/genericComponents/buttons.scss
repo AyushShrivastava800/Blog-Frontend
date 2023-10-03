@@ -35,19 +35,19 @@
     text-transform: capitalize !important;
     height: 3.125rem;
 
-   max-width: 10rem; 
-   width: 100%;
-   position: fixed !important;
+    max-width: 10rem;
+    width: 100%;
+    position: fixed !important;
     bottom: 5rem;
     right: 2rem;
     z-index: 99;
-    }
+}
 
-.uploadbtn{
-        background-color: $primary !important;
-        color: $white !important;
-            text-transform: capitalize !important;
-                height: 3.125rem;
-               max-width: 15rem;
-                        width: 100%;
-            }
+.uploadbtn {
+    border-color: $primary !important;
+    color: $primary !important;
+    text-transform: capitalize !important;
+    height: 3.125rem;
+    max-width: 15rem;
+    width: 100%;
+}

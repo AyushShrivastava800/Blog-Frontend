@@ -6,13 +6,12 @@ import { SubmitButton } from "../../GenericComponents/Buttons/buttons";
 
 function Signup() {
   return (
-    <>
+    <>  
+    
       <Box className="signup-page">
         <Grid container spacing={2}>
-          <Grid item md={6} sx={{ display: { md: "block", xs: "none" } }}>
-            <Box className="singup-pageImage"></Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
+          
+          <Grid item xs={12} >
             <Box className="signupForm">
               <Box className="signupForm-content">
                 <Box>

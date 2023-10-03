@@ -2,20 +2,19 @@ import React from "react";
 import { Box, Grid, Container, Typography, Stack } from "@mui/material";
 import Banner from "../../GenericComponents/Banner";
 import Blogcards from "../../GenericComponents/blogcards";
-import { AddBlog } from "../../GenericComponents/Buttons/buttons";
-import {  category } from "../../constants/items";
+import { category } from "../../constants/items";
 import Image from "../../../assets/photo-1682686581220-689c34afb6ef.avif";
 import { useSelector, useDispatch } from "react-redux";
 import { Categoryfilter } from "../../features/slice/filterSlice";
+import BasicModal from "../signup/BasicModal";
+
 function Home() {
   const { categoryBlog } = useSelector((store) => store.blogFilter);
   const dispatch = useDispatch();
 
-
   return (
     <>
-      <AddBlog title={"Add Blog"} />
-
+      <BasicModal />
       <Box className="home">
         <Grid container>
           <Grid item xs={12}>
