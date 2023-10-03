@@ -1,0 +1,21 @@
+.home{
+    position: relative;
+    .post-head{
+        font-size:$h3-font-size;
+        font-weight: $font-weight-bold;
+        text-align: center;
+    }
+    .categories-slector{
+     
+        margin-left: 1rem;
+      
+        .catopt{
+            font-size: $font-size-lg;
+                    
+            &:hover{
+                cursor: pointer;
+                color: $primary;
+            }
+        }
+    }
+}

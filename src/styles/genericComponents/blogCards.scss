@@ -1,0 +1,57 @@
+.blogCards {
+    max-width: 21.5625rem;
+
+    .blogCardLink {
+        text-decoration: none;
+        color: black;
+
+        &:visited {
+            color: green;
+        }
+
+        &:hover {
+            color: $gray;
+        }
+    }
+
+    .cardMedia {
+        height: 15rem;
+        object-fit: cover;
+
+    }
+
+    .cardContent {
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        .cardtitle {
+            height: 2rem;
+            overflow: hidden;
+            font-size: $font-size-lg;
+            text-decoration: none;
+
+        }
+
+        .cardbody {
+            height: 6rem;
+            overflow: hidden;
+            text-decoration: none !important;
+        }
+    }
+
+    .authorBox {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1rem;
+
+        .author {
+            font-size: $font-size-sm;
+            text-align: start;
+        }
+
+        .author-date {
+            font-size: $body3-font-size;
+        }
+    }
+}

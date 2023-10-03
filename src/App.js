@@ -1,30 +1,30 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import { store } from "./component/features/store/store";
 import { Provider } from "react-redux";
-import { store } from "./component/features/store/Store";
-import MainAppBar from "./component/layout/MainAppBar";
-import HomePage from "./component/screens/login-signup/signupPage";
-import ScrollToTop from "./component/scrollToTop/ScrollToTop";
-import Signup from "./component/screens/login-signup/signupPage";
-import LogIn from "./component/screens/login-signup/loginPage";
-import Blog from "./component/screens/Blog/LayOut";
-import Protected from "./component/protectedRoutes/Protected";
-import PageNotFound from "./component/screens/PageNotFound/PageNotFound";
+import Home from "./component/screens/Home-page/Home";
+import Signup from "./component/screens/signup/Signup";
+import Login from "./component/screens/login/Login";
+import Header from "./component/GenericComponents/Buttons/Header/header";
+import CreateBlog from "./component/screens/createblog/createBlog";
+import Footer from "./component/GenericComponents/Footer";
+import Blog from "./component/screens/blogs/blog";
+import ScrollToTop from "./component/GenericComponents/scrollToTop";
 const App = () => {
-
   return (
     <>
       <Provider store={store}>
         <ScrollToTop />
-
-        <MainAppBar />
+        <Header />
         <Routes>
-          <Route exact path="/" element={<HomePage/>} />
+          <Route exact path="/" element={<Home/>} />
+          <Route exact path="/createblog" element={<CreateBlog />} />
+          <Route exact path="/blogs/:id" element={<Blog />} />
           <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/login" element={<LogIn />} />
-          <Route exact path="/blog" element={<Protected Component={Blog}/>}/>     
-          <Route path="*" element={<Protected Component={PageNotFound}/>}/>
+          <Route exact path="/login" element={<Login />} />
         </Routes>
+
+        <Footer />
       </Provider>
     </>
   );

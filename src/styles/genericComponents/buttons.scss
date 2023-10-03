@@ -1,0 +1,53 @@
+.btn {
+    width: 10rem;
+    height: 3.125rem;
+    text-decoration: none;
+    text-transform: capitalize;
+    font-size: $font-size-base;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: $sm-breakpoint) {
+        font-size: $font-size-sm;
+        max-width: 8rem;
+        max-height: 3rem;
+    }
+}
+
+.rounded-btn {
+    border-radius: 3.125rem;
+    border: 1px solid $white;
+    color: $white;
+}
+
+.submitButton {
+    background-color: $primary !important;
+    color: $white !important;
+    text-transform: capitalize !important;
+    height: 3.125rem;
+}
+
+.AddBlog {
+    background-color: $primary !important;
+    color: $white !important;
+    text-transform: capitalize !important;
+    height: 3.125rem;
+
+   max-width: 10rem; 
+   width: 100%;
+   position: fixed !important;
+    bottom: 5rem;
+    right: 2rem;
+    z-index: 99;
+    }
+
+.uploadbtn{
+        background-color: $primary !important;
+        color: $white !important;
+            text-transform: capitalize !important;
+                height: 3.125rem;
+               max-width: 15rem;
+                        width: 100%;
+            }

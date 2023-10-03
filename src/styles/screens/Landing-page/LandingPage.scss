@@ -1,0 +1,42 @@
+.Landing-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100vh;
+    background-image: url("../../../assets/photo-1682686581220-689c34afb6ef.avif");
+    background-position: center;
+    background-size: cover;
+
+    @media only screen and (max-width:900px) {
+        background-position: inherit;
+    }
+
+    .Landing-content {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 1rem;
+
+        .landing-Head {
+            color: $white;
+        }
+    }
+}
+
+.signup-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+
+    .singup-pageImage {
+        height: 100%;
+        background-image: url("../../../assets/photo-1682686581220-689c34afb6ef.avif");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+    }
+
+   
+}

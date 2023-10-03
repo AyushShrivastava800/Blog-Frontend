@@ -1,0 +1,19 @@
+.Add-blog-page {
+
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    .blogHead {
+        margin-top: 6rem;
+
+        font-size: $h3-font-size !important;
+        font-weight: $font-weight-bold;
+    }
+
+    .input-fields {
+        max-width: 31.25rem;
+        width: 100%;
+    }
+}
