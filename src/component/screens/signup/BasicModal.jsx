@@ -1,11 +1,10 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
 import {  useNavigate } from "react-router-dom";
-import Signup from "./Signup";
+import SignupTabs from "./signup_tabs";
 
 const style = {
   position: "absolute",
@@ -13,24 +12,25 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
+
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
 
-export default function BasicModal() {
+export default function BasicModal({title}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
 
-  const user = localStorage.getItem("loggedUser");
+  const user = localStorage.getItem("loggedInUser");
 
   return (
     <div>
       <Button onClick={handleOpen} className="AddBlog mt-18">
-        Add Blog
+        {title}
       </Button>
       {!user ? (
         <Modal
@@ -40,12 +40,11 @@ export default function BasicModal() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            
-            <Signup/>
+            <SignupTabs />
           </Box>
         </Modal>
       ) : (
-        navigate("/login")
+        navigate("/createblog", { replace: true })
       )}
     </div>
   );

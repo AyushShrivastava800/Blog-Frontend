@@ -14,7 +14,7 @@ function Home() {
 
   return (
     <>
-      <BasicModal />
+      <BasicModal title={"Add blog"} />
       <Box className="home">
         <Grid container>
           <Grid item xs={12}>

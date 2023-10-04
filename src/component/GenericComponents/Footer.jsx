@@ -6,12 +6,12 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 function Footer() {
   return (
     <Box sx={{ flexGrow: 1 }} className="footer-container mt-18">
-      <footer class="footer">
-        <Box class="waves">
-          <Box class="wave" id="wave1"></Box>
-          <Box class="wave" id="wave2"></Box>
-          <Box class="wave" id="wave3"></Box>
-          <Box class="wave" id="wave4"></Box>
+      <footer className="footer">
+        <Box className="waves">
+          <Box className="wave" id="wave1"></Box>
+          <Box className="wave" id="wave2"></Box>
+          <Box className="wave" id="wave3"></Box>
+          <Box className="wave" id="wave4"></Box>
         </Box>
         <Container>
           <Grid container spacing={2}>

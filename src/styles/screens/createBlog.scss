@@ -1,21 +1,46 @@
 .Add-blog-page {
-
-
-
-    .blogHead {
-        margin-top: 6rem;
-
-        font-size: $h3-font-size !important;
+    .head {
+        text-align: center;
+        font-size: $font-size-lg;
         font-weight: $font-weight-bold;
     }
 
-    .input-fields {
-        max-width: 31.25rem;
-        width: 100%;
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .formBox {
+            max-width: 31.25rem;
+            width: 100%;
+        }
     }
-    .buttons-box{
-        max-width: 15rem;
-        width: 100%;
-  
+
+    .upload-btn {
+        background-color: $primary;
+
+        &:hover {
+            background-color: white;
+            color: black;
+        }
     }
+
+
+
+
+    .Avatar-container {
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        padding: 1rem;
+        @media only screen and (max-width:600px){
+            justify-content: center;
+        }
+        .avatar {
+            height: 15rem;
+            width: 15rem;
+        }
+    }
+
 }
