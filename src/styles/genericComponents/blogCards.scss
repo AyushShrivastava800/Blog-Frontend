@@ -1,6 +1,13 @@
 .blogCards {
     max-width: 21.5625rem;
 
+    transition: all 0.5s ease-out;
+
+    &:hover {
+        transform: translateY(-5px);
+
+    }
+
     .blogCardLink {
         text-decoration: none;
         color: black;
@@ -9,21 +16,20 @@
             color: green;
         }
 
-        &:hover {
-            color: $gray;
-        }
+
     }
 
     .cardMedia {
         height: 15rem;
         object-fit: cover;
+        border-radius: 1.25rem;
 
     }
 
     .cardContent {
         overflow: hidden;
         text-overflow: ellipsis;
-           
+
         .cardtitle {
             height: 2rem;
             overflow: hidden;
@@ -37,7 +43,7 @@
             overflow: hidden;
             text-decoration: none !important;
         }
-        
+
     }
 
     .authorBox {

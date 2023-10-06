@@ -8,13 +8,23 @@
     .categories-slector{
      
         margin-left: 1rem;
-      
+        justify-content: flex-start;
+        align-items: center;
+        
         .catopt{
             font-size: $font-size-lg;
-                    
+            font-weight: $font-weight-bold;
+            // padding: 5px;
+            // background-color: aqua;
+            max-width: 5rem;
+            height: 2rem;
+            width: 100%;
+            text-align: center;
             &:hover{
                 cursor: pointer;
-                color: $primary;
+                color: $light-blue;
+
+    
             }
         }
     }

@@ -1,14 +1,26 @@
-import { Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography, Chip,Button } from "@mui/material";
 import { Box, Stack } from "@mui/system";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import { SubmitButton } from "../../GenericComponents/Buttons/buttons";
 import { Formik } from "formik";
 import InputField from "../../GenericComponents/InputFields";
+import { useLazyGetAllUsersQuery } from "../../features/api/api";
+import { useEffect } from "react";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import GoogleIcon from "@mui/icons-material/Google";
 import * as yup from "yup";
+import PasswordField from "../../GenericComponents/passwoedField";
 
 function Login() {
-  const navigate=useNavigate();
+  const [getUsers, { data }] = useLazyGetAllUsersQuery();
+
+  useEffect(() => {
+    getUsers();
+  }, [getUsers]);
+
+  const navigate = useNavigate();
   const validationLogin = yup.object({
     Email: yup
       .string()
@@ -17,16 +29,23 @@ function Login() {
     password: yup.string().required("please enter your password"),
   });
 
-  const handlelogin = (values, resetForm) => {
-    const dataUser = localStorage.getItem("loggedUser");
-    const loggedUser = JSON.parse(dataUser);
-    if (
-      loggedUser.Email === values.Email &&
-      loggedUser.password === values.password
-    ) {
-      localStorage.setItem("loggedInUser", JSON.stringify(values));
-      navigate("/createblog");
-      resetForm();
+  const handleLogin = async (values, resetForm) => {
+    try {
+      const users = data.find(
+        (item) =>
+          item.Email === values.Email && item.password === values.password
+      );
+
+      if (users) {
+        resetForm();
+         const { password, ...userWithoutPassword } = users;
+        localStorage.setItem("loggedIn", JSON.stringify(userWithoutPassword));
+        navigate("/createblog");
+      } else {
+        console.log("error");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
     }
   };
 
@@ -36,7 +55,7 @@ function Login() {
   };
   return (
     <>
-      <Box className="signup-page">
+      <Box className="login-page">
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Box className="signupForm">
@@ -51,7 +70,7 @@ function Login() {
                   initialValues={initialvalues}
                   validationSchema={validationLogin}
                   onSubmit={(values, { resetForm }) =>
-                    handlelogin(values, resetForm)
+                    handleLogin(values, resetForm)
                   }
                 >
                   {({ values, handleSubmit }) => (
@@ -65,11 +84,11 @@ function Login() {
                           ></InputField>
                         </Stack>
                         <Stack className="mt-18">
-                          <InputField
+                          <PasswordField
                             label="Password"
                             name="password"
                             value={values.password}
-                          ></InputField>
+                          ></PasswordField>
                         </Stack>
 
                         <SubmitButton title={"login"} />
@@ -77,6 +96,22 @@ function Login() {
                     </form>
                   )}
                 </Formik>
+              </Box>
+              <Box>
+                <Divider>
+                  <Chip label="OR" />
+                </Divider>
+                <Box className="login-Icons">
+                  <Button className="icon-box">
+                    <FacebookIcon />
+                  </Button>
+                  <Button className="icon-box">
+                    <GoogleIcon />
+                  </Button>
+                  <Button className="icon-box">
+                    <TwitterIcon />
+                  </Button>
+                </Box>
               </Box>
             </Box>
           </Grid>

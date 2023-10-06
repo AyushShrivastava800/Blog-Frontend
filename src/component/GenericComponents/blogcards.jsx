@@ -8,8 +8,8 @@ import { Avatar, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 export default function blogcards({ id,title, body, Image, author, date }) {
   return (
-    <Card className="blogCards">
-      <Link to={{ pathname: `/blogs/${id}`}} className="blogCardLink">
+    <Card className="blogCards" elevation={0}>
+      <Link to={{ pathname: `/blogs/${id}` }} className="blogCardLink">
         <CardActionArea>
           <CardMedia
             className="cardMedia"

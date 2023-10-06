@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Items } from "../../constants/items";
-// import { current } from "@reduxjs/toolkit";
+
 const initialState = {
-  blog: Items,
-  categoryBlog: Items,
+  blog: [],
+  categoryBlog:Items,
   total: 0,
   isloading: 0,
 };
@@ -14,19 +14,22 @@ const blogFilterSlice = createSlice({
     sortLatest: (state) => {
       state.blog = state.blog.reverse();
     },
+    getPosts: (state, { payload }) => {
+ 
+      console.log(payload.data,"payload")
+    },
     Categoryfilter: (state, { payload }) => {
-      if ((payload === "All Posts")) {
+      if (payload === "All Posts") {
         state.categoryBlog = state.blog;
-        console.log((state.categoryBlog),"yes");
+        console.log(state.categoryBlog, "yes");
       } else {
         state.categoryBlog = state.blog.filter(
           (items) => items.category === payload
         );
-                console.log((state.categoryBlog),"no");
-
+        console.log(state.categoryBlog, "no");
       }
     },
   },
 });
-export const { sortLatest, Categoryfilter } = blogFilterSlice.actions;
+export const { sortLatest, Categoryfilter, getPosts } = blogFilterSlice.actions;
 export default blogFilterSlice.reducer;

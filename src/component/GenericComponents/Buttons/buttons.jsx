@@ -16,6 +16,13 @@ export const RoundButton = ({ title, url }) => {
     </Box>
   );
 };
+export const LinkButton = ({ title, url }) => {
+  return (
+    <Box component={Link} to={url} className="LinkButton ">
+      {title}
+    </Box>
+  );
+};
 export const SubmitButton = ({ title }) => {
   return (
     <Button type="submit" className="submitButton mt-18" fullWidth>

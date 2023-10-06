@@ -4,17 +4,33 @@ import Banner from "../../GenericComponents/Banner";
 import Blogcards from "../../GenericComponents/blogcards";
 import { category } from "../../constants/items";
 import Image from "../../../assets/photo-1682686581220-689c34afb6ef.avif";
-import { useSelector, useDispatch } from "react-redux";
-import { Categoryfilter } from "../../features/slice/filterSlice";
 import BasicModal from "../signup/BasicModal";
-
+import { useEffect, useState } from "react";
+import { useLazyGetallpostsQuery } from "../../features/api/api";
 function Home() {
-  const { categoryBlog } = useSelector((store) => store.blogFilter);
-  const dispatch = useDispatch();
+  const [getAllposts, { data }] = useLazyGetallpostsQuery();
+  const [categoryfilter, setCategoryFilter] = useState();
+  useEffect(() => {
+    if (data) {
+      const mapReverse1 = data.slice(0).reverse();
+      setCategoryFilter(mapReverse1);
+    }
+  }, [data]);
+  const handleFilter = (category) => {
+    if (category == "All Posts") {
+      setCategoryFilter(data);
+    } else {
+      const categoryData = data?.filter((e) => e.category === category);
+      setCategoryFilter(categoryData);
+    }
+  };
+  useEffect(() => {
+    getAllposts();
+  }, [getAllposts, categoryfilter]);
 
   return (
     <>
-      <BasicModal title={"Add blog"} />
+      <BasicModal title={"Add blog"} className="AddBlog mt-18" />
       <Box className="home">
         <Grid container>
           <Grid item xs={12}>
@@ -34,14 +50,11 @@ function Home() {
                   <Stack
                     className="categories-slector"
                     direction={"row"}
-                    spacing={5}
                   >
                     {category.map((items, index) => (
                       <Typography
                         key={index}
-                        onClick={() => {
-                          dispatch(Categoryfilter(items.category));
-                        }}
+                        onClick={(e) => handleFilter(items.category)}
                         className="catopt"
                       >
                         {items.category}
@@ -49,7 +62,7 @@ function Home() {
                     ))}
                   </Stack>
                 </Grid>
-                {categoryBlog.slice(0, 6).map((item, index) => (
+                {categoryfilter?.map((item, index) => (
                   <Grid item md={4} sm={6} xs={12} key={index}>
                     <Box className=" mb-18 center">
                       <Blogcards

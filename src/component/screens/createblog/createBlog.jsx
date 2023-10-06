@@ -7,33 +7,61 @@ import { Formik } from "formik";
 import InputField from "../../GenericComponents/InputFields";
 import * as yup from "yup";
 import InputFileUpload from "../../GenericComponents/ImageUpload";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAddpostsMutation } from "../../features/api/api";
+import InputSelect from "../../GenericComponents/InputSelect";
+
+function formatDate(date) {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+}
+
 function CreateBlog() {
-  const [fileupload,setFileupload]=useState();
-  const initialvalues = {
+  const [fileupload, setFileupload] = useState("");
+  console.log(fileupload);
+  const [addpost] = useAddpostsMutation();
+  const author = JSON.parse(localStorage.getItem("loggedIn"));
+ 
+  const [initialvalues, setInitialValues] = useState({
     title: "",
-    content: "",
-    file:"",
-  };
+    description: "",
+    image: fileupload,
+    category: "",
+    author: `${author.first_name} ${author.last_name}`,
+    date: formatDate(new Date()),
+  });
   const validatepost = yup.object({
     title: yup.string().required("Cannot Post without title"),
-    content: yup.string().required("Cannot Post emty post"),
+    description: yup.string().required("Cannot Post emty post"),
   });
   const handlePost = (values, resetForm) => {
-    
-     localStorage.setItem("blog-post", JSON.stringify(values));
+    console.log(values, "values");
+    addpost(values);
+
+    setInitialValues((prevValues) => ({
+      ...prevValues,
+      date: formatDate(new Date()),
+    }));
   };
+  useEffect(() => {
+    setInitialValues((prevValues) => ({
+      ...prevValues,
+      date: formatDate(new Date()),
+    }));
+  }, []);
   return (
     <>
       <Box className="Add-blog-page">
-        <Grid container >
-            <Grid item xs={12}>
-              <Banner
-                title={"welcome to our blog"}
-                content={"lorem jnnfj nfejnfjen fenjfnjenf nfjenfjen fnejnfejn"}
-                Image={Image}
-              />
-            </Grid>
+        <Grid container>
+          <Grid item xs={12}>
+            <Banner
+              title={"welcome to our blog"}
+              content={"lorem jnnfj nfejnfjen fenjfnjenf nfjenfjen fnejnfejn"}
+              Image={Image}
+            />
+          </Grid>
           <Grid item xs={12}>
             <Container>
               <Grid container>
@@ -47,6 +75,7 @@ function CreateBlog() {
                     <Avatar src={fileupload} className="avatar" />
                   </Box>
                 </Grid>
+
                 <Grid item sm={8} xs={12}>
                   <Box className="form-container mb-30">
                     <Box className="formBox">
@@ -57,7 +86,7 @@ function CreateBlog() {
                           handlePost(values, resetForm);
                         }}
                       >
-                        {({ values, handleSubmit }) => (
+                        {({ values, handleSubmit, setFieldValue }) => (
                           <form onSubmit={handleSubmit}>
                             <Box>
                               <Stack className="mt-18">
@@ -70,16 +99,23 @@ function CreateBlog() {
                               <Stack className="mt-18">
                                 <InputField
                                   label="Message"
-                                  name="content"
+                                  name="description"
                                   rows={5}
-                                  value={values.content}
+                                  value={values.description}
                                 ></InputField>
+                              </Stack>
+                              <Stack className="mt-18">
+                                <InputSelect
+                                  label="category"
+                                  name="category"
+                                  value={values.category}
+                                />
                               </Stack>
                               <Stack className="mt-18">
                                 <InputFileUpload
                                   label="Upload file"
-                                  name="file"
-                                  value={values.file}
+                                  name="image"
+                                  value={values.image}
                                   setFileupload={setFileupload}
                                 />
                               </Stack>

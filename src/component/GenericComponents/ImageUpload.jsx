@@ -18,16 +18,18 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 export default function InputFileUpload({ setFileupload, name, label }) {
-  const [selectedFile, setSelectedFile] = useState("");
   const [field] = useField(name);
-
+    const [selectedFile, setSelectedFile] = useState("");
+    console.log(selectedFile);
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
+  
     const reader = new FileReader();
     reader.onload = () => {
       setFileupload(reader.result);
     };
+    reader.readAsBinaryString(file);
     reader.readAsDataURL(file);
   };
 
@@ -35,7 +37,7 @@ export default function InputFileUpload({ setFileupload, name, label }) {
     <>
       <Box>
         <Button
-        className="upload-btn"
+          className="upload-btn"
           component="label"
           variant="contained"
           startIcon={<CloudUploadIcon />}
@@ -49,11 +51,10 @@ export default function InputFileUpload({ setFileupload, name, label }) {
             }}
             onBlur={field.onBlur}
             name={field.name}
-            value={field.value}
+            value={field.selectedFile}
           />
         </Button>
       </Box>
-   
     </>
   );
 }

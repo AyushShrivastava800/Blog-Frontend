@@ -5,14 +5,26 @@ import { SubmitButton } from "../../GenericComponents/Buttons/buttons";
 import { Formik } from "formik";
 import InputField from "../../GenericComponents/InputFields";
 import * as yup from "yup";
-
- const register = (values, resetForm) => {
-   localStorage.setItem("loggedUser", JSON.stringify(values));
-   console.log("Form data saved to localStorage:", values);
-   resetForm();
- };
+import {
+  useLazyGetAllUsersQuery,
+  useAddUserMutation,
+} from "../../features/api/api";
+import { useEffect } from "react";
+import PasswordField from "../../GenericComponents/passwoedField";
 
 function Signup() {
+  const [getUsers] = useLazyGetAllUsersQuery();
+  const [adduser] = useAddUserMutation();
+
+  const register = (values, resetForm) => {
+    adduser(values);
+    resetForm();
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, [getUsers]);
+
   const initialvalues = {
     first_name: "",
     last_name: "",
@@ -58,34 +70,34 @@ function Signup() {
                 >
                   {({ values, handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
-                      <Box className=" mb-18">
-                        <Stack className="mt-18">
+                      <Box className="">
+                        <Stack className="mt-10">
                           <InputField
                             label="First name"
                             name="first_name"
                             value={values.first_name}
                           ></InputField>
                         </Stack>
-                        <Stack className="mt-18">
+                        <Stack className="mt-10">
                           <InputField
                             label="Last name"
                             name="last_name"
                             value={values.last_name}
                           ></InputField>
                         </Stack>
-                        <Stack className="mt-18">
+                        <Stack className="mt-10">
                           <InputField
                             label="Email"
                             name="Email"
                             value={values.Email}
                           ></InputField>
                         </Stack>
-                        <Stack className="mt-18">
-                          <InputField
+                        <Stack className="mt-10">
+                          <PasswordField
                             label="Password"
                             name="password"
                             value={values.password}
-                          ></InputField>
+                          ></PasswordField>
                         </Stack>
 
                         <SubmitButton title={"signup"} />
